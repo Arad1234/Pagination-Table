@@ -1,14 +1,17 @@
-import React from "react";
-import { UserRelevantData } from "../../../../../types/index";
-import { DataGrid } from "@mui/x-data-grid";
+import { UserRelevantData } from "../../../types/index";
+import { DataGrid, GridRowParams } from "@mui/x-data-grid";
 import "./Table.scss";
 import TableColumns from "../Table-columns/TableColumns";
+import { Box } from "@mui/material";
+import axiosClient from "../../../axiosClient";
 
-interface TableProps {
+interface Props {
   users: UserRelevantData[];
+  order: string;
+  setOrder: React.Dispatch<React.SetStateAction<"asc" | "desc">>;
 }
 
-const Table = ({ users }: TableProps) => {
+const Table = ({ users, order, setOrder }: Props) => {
   const fromattedUsers = users.map((user) => {
     const { city, street, suite, zipcode } = user.address;
     const formattedAddress = `${street}, ${suite}, ${city}, ${zipcode}`;
@@ -20,43 +23,25 @@ const Table = ({ users }: TableProps) => {
     };
   });
 
+  const handleRowClick = async (params: GridRowParams) => {
+    const response = await axiosClient.get("/posts", {
+      params: { userId: params.id },
+    });
+    console.log(response);
+  };
+
   return (
-    <DataGrid
-      sx={{}}
-      columns={TableColumns()}
-      rows={fromattedUsers}
-      getRowClassName={(params) => "rows-class"}
-    />
+    <Box sx={{ width: "100%" }}>
+      <DataGrid
+        // onColumnOrderChange={() => setOrder(order === "asc" ? "desc" : "asc")}
+        hideFooter
+        columns={TableColumns()}
+        onRowClick={handleRowClick}
+        rows={fromattedUsers}
+        getRowClassName={() => "rows-class"}
+      />
+    </Box>
   );
-  // return (
-  //   <table>
-  //     <thead>
-  //       <tr>
-  //         <th>Full name</th>
-  //         <th>Email Address</th>
-  //         <th>Address</th>
-  //       </tr>
-  //     </thead>
-  //     <tbody>
-  //       {users.map((user) => {
-  //         const { street, suite, city, zipcode } = user.address;
-  //         const addressFormat = `${street}, ${suite}, ${city}, ${zipcode}`;
-  //         return (
-  //           <tr
-  //             onClick={() => navigate(`${URLS.USERS_URL}/${user.id}`)}
-  //             key={user.id}
-  //           >
-  //             <td>{user.name}</td>
-  //             <td>{user.email}</td>
-  //             <td>
-  //               <span className="adress">{addressFormat}</span>
-  //             </td>
-  //           </tr>
-  //         );
-  //       })}
-  //     </tbody>
-  //   </table>
-  // );
 };
 
 export default Table;

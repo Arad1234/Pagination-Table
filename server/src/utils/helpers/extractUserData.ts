@@ -1,4 +1,4 @@
-import type { User } from "../../../../types/index";
+import type { User } from "../../types/index";
 
 export const extractUserData = (users: User[]) => {
   const relevantUserData = users.map((user: User) => {

@@ -1,9 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Table from "../../components/Table-UI/Table/Table";
-import {
-  fetchUsersQuery,
-  usersCountQuery,
-} from "../../react-query/queries/users.queries";
+import { fetchUsersQuery } from "../../react-query/queries/users.queries";
 import "./Home.scss";
 import { USERS_PER_PAGE } from "../../utils/constants";
 import PaginationPages from "../../components/PaginationPages/PaginationPages";
@@ -12,7 +9,6 @@ const Home = () => {
   const [page, setPage] = useState<number>(1);
   const [order, setOrder] = useState<"asc" | "desc">("asc");
 
-  const { data: usersCount } = usersCountQuery();
   const { data, isLoading, refetch, isError } = fetchUsersQuery({
     page: page,
     limit: USERS_PER_PAGE,
@@ -33,32 +29,20 @@ const Home = () => {
       {isLoading ? (
         <h1>Loading...</h1>
       ) : (
-        <div className="table-button-container">
-          <div>
-            <Table users={data.users} />
-          </div>
+        <div className="table-pages-container">
+          <Table
+            users={data.users}
+            order={order}
+            setOrder={setOrder}
+          />
           <PaginationPages
-            numOfPages={Math.ceil(usersCount / USERS_PER_PAGE)}
+            numOfPages={data.numOfPages}
             currentPage={page}
             setPage={setPage}
           />
-          <div className="buttons">
-            <button
-              disabled={page === 1}
-              onClick={() => setPage((prevPage) => prevPage - 1)}
-            >
-              Prev Page
-            </button>
-            <button
-              disabled={page === Math.ceil(usersCount / USERS_PER_PAGE)}
-              onClick={() => setPage((prevPage) => prevPage + 1)}
-            >
-              Next Page
-            </button>
-            <button onClick={() => setOrder(order === "asc" ? "desc" : "asc")}>
-              {order === "asc" ? "Descending order" : "Ascending order"}
-            </button>
-          </div>
+          <button onClick={() => setOrder(order === "asc" ? "desc" : "asc")}>
+            {order === "asc" ? "Descending order" : "Ascending order"}
+          </button>
         </div>
       )}
     </div>

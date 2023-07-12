@@ -1,16 +1,13 @@
 import React from "react";
 import "./PaginationPages.scss";
-interface PaginationPagesProps {
+
+interface Props {
   numOfPages: number;
   currentPage: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const PaginationPages = ({
-  numOfPages,
-  currentPage,
-  setPage,
-}: PaginationPagesProps) => {
+const PaginationPages = ({ numOfPages, currentPage, setPage }: Props) => {
   const handlePageChanged = (e: React.MouseEvent<HTMLLabelElement>) => {
     const { innerHTML } = e.currentTarget;
     setPage(Number(innerHTML));
@@ -20,6 +17,7 @@ const PaginationPages = ({
     { length: numOfPages },
     (_, index) => index + 1
   );
+
   return (
     <div className="pages-container">
       {pagesArray.map((page) => {
