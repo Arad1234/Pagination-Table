@@ -1,6 +1,5 @@
-export type userData = {
-  _id: string;
-  fullName: string;
-  email: string;
-  adress: string;
+export type PaginationParams = {
+  order: string;
+  limit: number;
+  page: number;
 };

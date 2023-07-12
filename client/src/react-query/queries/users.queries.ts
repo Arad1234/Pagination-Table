@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchUsers } from "../services/users.service";
-import { userData } from "../../types";
+import { PaginationParams } from "../../types";
 
-export const fetchUsersQuery = () => {
+export const fetchUsersQuery = (paginationParams: PaginationParams) => {
   return useQuery({
-    queryKey: ["users"],
-    queryFn: () => fetchUsers(),
+    // Whenever one of those parameters changes, the queryFn will be called again.
+    queryKey: [paginationParams.order, paginationParams.page],
+    queryFn: () => fetchUsers(paginationParams),
   });
 };

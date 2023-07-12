@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+
+  .table-button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+
+    h4 {
+      margin: auto;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 20px;
+    }
+  }
+}

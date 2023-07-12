@@ -1,6 +1,6 @@
 import { StatusCodes } from "http-status-codes";
 
-export const { BAD_REQUEST, OK } = StatusCodes;
+export const { BAD_REQUEST, OK, INTERNAL_SERVER_ERROR } = StatusCodes;
 
 const BASE_URL = "https://jsonplaceholder.typicode.com";
 

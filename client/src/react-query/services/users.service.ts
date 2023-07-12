@@ -1,8 +1,10 @@
 import { AxiosResponse } from "axios";
 import axiosClient from "../../axiosClient";
-import { userData } from "../../types";
+import { PaginationParams } from "../../types";
 
-export const fetchUsers = async () => {
-  const response: AxiosResponse = await axiosClient.get("/users");
+export const fetchUsers = async (paginationParams: PaginationParams) => {
+  const response: AxiosResponse = await axiosClient.get("/users", {
+    params: paginationParams,
+  });
   return response.data;
 };
