@@ -1,6 +1,6 @@
 export type QueryParams = {
-  page: number;
-  limit: number;
+  page: string;
+  limit: string;
   order: string;
   sort: string;
 };

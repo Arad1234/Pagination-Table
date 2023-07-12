@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { USERS_URL } from "../utils/constants";
 import { serializeParams } from "../utils/helpers/serializeParams";
-import { QueryParams } from "../../types";
+import { QueryParams } from "../types";
 import { extractUserData } from "../utils/helpers/extractUserData";
 
 export const getUsers = async (queryParams: QueryParams) => {
@@ -13,6 +13,16 @@ export const getUsers = async (queryParams: QueryParams) => {
     const relevantUserData = extractUserData(response.data);
 
     return relevantUserData;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+
+export const getUsersCount = async () => {
+  try {
+    const response = await axios.get(USERS_URL);
+    const { data: users } = response;
+    return users.length;
   } catch (error: any) {
     throw new Error(error);
   }

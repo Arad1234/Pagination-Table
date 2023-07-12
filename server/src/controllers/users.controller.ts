@@ -1,10 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-import axios, { AxiosResponse } from "axios";
-import { BAD_REQUEST, OK, USERS_URL } from "../utils/constants";
-import { serializeParams } from "../utils/helpers/serializeParams";
-import { extractUserData } from "../utils/helpers/extractUserData";
-import { getUsers } from "../services/users.service";
-import { QueryParams } from "../../types";
+import { OK } from "../utils/constants";
+import { getUsers, getUsersCount } from "../services/users.service";
+import { QueryParams } from "../types";
 
 export const getUsersHandler = async (
   req: Request,
@@ -14,8 +11,8 @@ export const getUsersHandler = async (
   const { page, limit, order } = req.query;
 
   const queryParams = {
-    page: Number(page),
-    limit: Number(limit),
+    page: page,
+    limit: limit,
     order: order,
     sort: "name",
   };
@@ -25,6 +22,20 @@ export const getUsersHandler = async (
 
     res.status(OK).json({ users: relevantUserData });
   } catch (error: any) {
+    next(error);
+  }
+};
+
+export const countUsersHandler = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const usersCount = await getUsersCount();
+    // For some reason express does not allow me to send the response data as a number.
+    res.status(OK).send(usersCount.toString());
+  } catch (error) {
     next(error);
   }
 };

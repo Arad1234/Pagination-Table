@@ -1,7 +1,7 @@
 export const URLS = {
   HOME: "/",
-  POSTS_URL: "/posts",
-  USER_POSTS_URL: "/posts/:userId",
+  USERS_URL: "/users",
+  USER_POSTS_URL: "/users/:userId",
 };
 
 export const USERS_PER_PAGE: number = 4;
