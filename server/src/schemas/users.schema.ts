@@ -1,6 +1,6 @@
 import { literal, object, string, union } from "zod";
 
-const userPaginationSchema = object({
+export const userPaginationSchema = object({
   query: object({
     page: string(),
     limit: literal("4"),

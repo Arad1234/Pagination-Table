@@ -13,12 +13,3 @@ export const fetchUsers = async (paginationParams: PaginationParams) => {
   }
 };
 
-export const usersCount = async () => {
-  try {
-    const response = await axiosClient.get("/countUsers");
-    console.log(response);
-    return response.data;
-  } catch (error: any) {
-    throw new Error(error);
-  }
-};

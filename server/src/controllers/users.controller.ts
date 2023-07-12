@@ -9,14 +9,12 @@ export const getUsersHandler = async (
   next: NextFunction
 ) => {
   const { page, limit, order } = req.query;
-  console.log(page);
   const queryParams = {
     page: page,
     limit: limit,
     order: order,
     sort: "name",
   };
-  console.log(queryParams);
   try {
     const { relevantUsersData, hasNext, numOfPages } = await getUsers(
       queryParams as QueryParams

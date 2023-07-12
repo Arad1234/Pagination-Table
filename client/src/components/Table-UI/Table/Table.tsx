@@ -3,7 +3,8 @@ import { DataGrid, GridRowParams } from "@mui/x-data-grid";
 import "./Table.scss";
 import TableColumns from "../Table-columns/TableColumns";
 import { Box } from "@mui/material";
-import axiosClient from "../../../axiosClient";
+import { useNavigate } from "react-router-dom";
+import { URLS } from "../../../utils/constants";
 
 interface Props {
   users: UserRelevantData[];
@@ -12,6 +13,7 @@ interface Props {
 }
 
 const Table = ({ users, order, setOrder }: Props) => {
+  const navigate = useNavigate();
   const fromattedUsers = users.map((user) => {
     const { city, street, suite, zipcode } = user.address;
     const formattedAddress = `${street}, ${suite}, ${city}, ${zipcode}`;
@@ -24,10 +26,7 @@ const Table = ({ users, order, setOrder }: Props) => {
   });
 
   const handleRowClick = async (params: GridRowParams) => {
-    const response = await axiosClient.get("/posts", {
-      params: { userId: params.id },
-    });
-    console.log(response);
+    navigate(`${URLS.USERS_URL}/${params.id}`);
   };
 
   return (

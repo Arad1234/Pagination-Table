@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { getPosts } from "../services/posts.service";
+import { deletePost, getPosts } from "../services/posts.service";
 import { OK } from "../utils/constants";
 
 export const getPostsHandler = async (
@@ -15,8 +15,22 @@ export const getPostsHandler = async (
       limit as string | number
     );
 
-    res.status(OK).json({ posts: posts });
+    res.status(OK).send(posts);
   } catch (error: any) {
+    next(error);
+  }
+};
+
+export const deletePostHandler = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { postId } = req.params;
+  try {
+    const deletedPostId = await deletePost(postId);
+    res.status(OK).send(deletedPostId?.toString());
+  } catch (error) {
     next(error);
   }
 };
