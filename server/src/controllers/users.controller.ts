@@ -13,7 +13,7 @@ export const getUsersHandler = async (
     page: page,
     limit: limit,
     order: order,
-    sort: "name",
+    sortBy: "name",
   };
   try {
     const { relevantUsersData, hasNext, numOfPages } = await getUsers(

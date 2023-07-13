@@ -7,6 +7,7 @@ export const getPostsHandler = async (
   res: Response,
   next: NextFunction
 ) => {
+  // The getPostsHandler supports pagination.
   const { userId, page = 1, limit = 3000 } = req.query;
   try {
     const posts = await getPosts(

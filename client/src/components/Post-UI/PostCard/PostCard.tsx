@@ -14,19 +14,34 @@ interface Props {
 
 const PostCard = ({ title, body, postId, userId }: Props) => {
   // Custom hook "useModal"
-  const [isModalOpen, openModal, closeModal] = useModal();
+  const [isOpen, openModal, closeModal] = useModal();
 
-  const { mutate: deletePost } = deletePostQuery(closeModal, userId);
+  const { mutate: deletePostMutation } = deletePostQuery(closeModal, userId);
   return (
     <Box sx={{ border: "1px solid gray", width: "70%", borderRadius: "10px" }}>
-      <Box sx={{ display: "flex", flexDirection: "column", padding: "10px" }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          padding: "10px",
+          gap: "10px",
+        }}
+      >
         <Title>{title}</Title>
         <Body>{body}</Body>
-        <DeleteIcon onClick={openModal} />
+        <DeleteIcon
+          sx={{
+            cursor: "pointer",
+            ":hover": { background: "wheat" },
+            borderRadius: "20px",
+            padding: "3px",
+          }}
+          onClick={openModal}
+        />
       </Box>
 
       <Modal
-        open={isModalOpen}
+        open={isOpen}
         onClose={closeModal}
         sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
       >
@@ -54,7 +69,7 @@ const PostCard = ({ title, body, postId, userId }: Props) => {
           >
             <Button
               variant="contained"
-              onClick={() => deletePost(postId)}
+              onClick={() => deletePostMutation(postId)}
             >
               Delete
             </Button>

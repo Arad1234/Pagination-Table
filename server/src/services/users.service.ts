@@ -5,12 +5,12 @@ import { QueryParams } from "../types";
 import { extractUserData } from "../utils/helpers/extractUserData";
 
 export const getUsers = async (queryParams: QueryParams) => {
-  const { limit, order, page, sort } = queryParams;
+  const { limit, order, page, sortBy } = queryParams;
   const limitNum = Number(limit);
   const pageNum = Number(page);
   try {
     const response: AxiosResponse = await axios.get(USERS_URL, {
-      params: { order: order, sort: sort },
+      params: { order: order, sort: sortBy },
       paramsSerializer: serializeParams,
     });
     const users = response.data;

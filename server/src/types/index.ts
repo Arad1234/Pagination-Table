@@ -1,9 +1,9 @@
-export type QueryParams = {
+export interface QueryParams {
   page: string;
   limit: string;
   order: string;
-  sort: string;
-};
+  sortBy: string;
+}
 
 export interface Post {
   userId: number;

@@ -5,7 +5,7 @@ const TableColumns = () => {
     {
       field: "name",
       headerName: "Full Name",
-      width: 170,
+      width: 200,
       headerAlign: "center",
       headerClassName: "table-header",
       cellClassName: "table-cell",
@@ -13,7 +13,8 @@ const TableColumns = () => {
     {
       field: "email",
       headerName: "Email Address",
-      width: 170,
+      sortable: false,
+      width: 200,
       headerAlign: "center",
       headerClassName: "table-header",
       cellClassName: "table-cell",
@@ -21,7 +22,8 @@ const TableColumns = () => {
     {
       field: "address",
       headerName: "Address",
-      width: 170,
+      sortable: false,
+      width: 100,
       headerAlign: "center",
       headerClassName: "table-header",
       cellClassName: "table-cell",

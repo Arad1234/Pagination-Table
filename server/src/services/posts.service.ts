@@ -1,4 +1,4 @@
-import { Post, PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import axios from "axios";
 import { POSTS_URL } from "../utils/constants";
 import { serializeParams } from "../utils/helpers/serializeParams";
@@ -16,7 +16,6 @@ export const getPosts = async (
       take: Number(limit),
       where: { userId: Number(userId) },
     });
-
     if (dbPosts.length > 0) {
       return dbPosts;
     }
@@ -26,7 +25,6 @@ export const getPosts = async (
       paramsSerializer: serializeParams,
     });
     const { data: posts } = apiPosts;
-
     await prisma.post.createMany({ data: posts });
 
     return posts;

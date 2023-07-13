@@ -10,6 +10,6 @@ datasource db {
 model Post {
     userId Int
     id     Int    @id @unique
-    title  String @db.VarChar(1000)
-    body   String @db.VarChar(1000)
+    title  String @db.Text()
+    body   String @db.Text()
 }

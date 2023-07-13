@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Table from "../../components/Table-UI/Table/Table";
 import { fetchUsersQuery } from "../../react-query/queries/users.queries";
+import CircularProgress from "@mui/material/CircularProgress";
 import "./Home.scss";
 import { USERS_PER_PAGE } from "../../utils/constants";
 import PaginationPages from "../../components/PaginationPages/PaginationPages";
@@ -27,7 +28,7 @@ const Home = () => {
   return (
     <div className="container">
       {isLoading ? (
-        <h1>Loading...</h1>
+        <CircularProgress size={70} />
       ) : (
         <div className="table-pages-container">
           <Table
@@ -40,9 +41,6 @@ const Home = () => {
             currentPage={page}
             setPage={setPage}
           />
-          <button onClick={() => setOrder(order === "asc" ? "desc" : "asc")}>
-            {order === "asc" ? "Descending order" : "Ascending order"}
-          </button>
         </div>
       )}
     </div>

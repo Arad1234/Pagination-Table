@@ -1,8 +1,8 @@
-export type PaginationParams = {
+export interface PaginationParams {
   order: string;
   limit: number;
   page: number;
-};
+}
 
 export interface Post {
   userId: number;
@@ -11,7 +11,7 @@ export interface Post {
   body: string;
 }
 
-// I'm using the same interfaces in both the client and the server because when I build the app, I need the relevant files in the in the client/server directory.
+// I'm using the same "address" interfaces in both the client and the server because when I build the app, I need the relevant files in the in the client/server directory.
 interface address {
   street: string;
   suite: string;

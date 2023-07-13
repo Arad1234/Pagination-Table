@@ -32,7 +32,8 @@ const Table = ({ users, order, setOrder }: Props) => {
   return (
     <Box sx={{ width: "100%" }}>
       <DataGrid
-        // onColumnOrderChange={() => setOrder(order === "asc" ? "desc" : "asc")}
+        // Sort the "Full Name" column by name, indicating the sorting direction with an arrow icon.
+        onSortModelChange={() => setOrder(order === "asc" ? "desc" : "asc")}
         hideFooter
         columns={TableColumns()}
         onRowClick={handleRowClick}
