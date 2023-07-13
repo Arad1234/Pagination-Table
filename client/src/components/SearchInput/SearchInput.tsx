@@ -15,6 +15,7 @@ const SearchInput = ({ handleInputChange }: Props) => {
         margin: "20px",
         position: "absolute",
         top: "130px",
+        borderRadius: "5px",
       }}
       onChange={handleInputChange}
       placeholder="Search by title..."

@@ -14,7 +14,8 @@ interface Props {
 
 const Table = ({ users, order, setOrder }: Props) => {
   const navigate = useNavigate();
-  const fromattedUsers = users.map((user) => {
+
+  const formattedUsers = users.map((user) => {
     const { city, street, suite, zipcode } = user.address;
     const formattedAddress = `${street}, ${suite}, ${city}, ${zipcode}`;
     return {
@@ -37,7 +38,7 @@ const Table = ({ users, order, setOrder }: Props) => {
         hideFooter
         columns={TableColumns()}
         onRowClick={handleRowClick}
-        rows={fromattedUsers}
+        rows={formattedUsers}
         getRowClassName={() => "rows-class"}
       />
     </Box>
