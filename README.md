@@ -1,4 +1,4 @@
-# Weft Assignment
+# Pagination Table
 
 This project is a web application that displays a table of users with their name, email, and address. The user interface is designed using Material-UI (MUI) and MUI Data Grid. When a user clicks on a row, they will be navigated to a different URL displaying the user's posts. The project utilizes an external API to fetch user data and implements pagination. For the posts, it initially retrieves data from an external API and stores it in a MySQL Docker container using the Prisma ORM. The stack for this project includes React, TypeScript, React Query, Node.js, Express, MySQL, Prisma, and Zod for validation.
 
